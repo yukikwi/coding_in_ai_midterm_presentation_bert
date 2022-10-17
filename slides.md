@@ -229,3 +229,251 @@ src: ./slides/introduction_problems_of_rnn.md
 
 # Experiments
   - Exp-I: Investigating Different Fine-Tuning Strategies
+
+ 1. ชุดทดสอบ: **IMDb dataset** 
+    - จุดประสงค์ในการทดสอบที่ 1 : **Fine-tune โดยทดสอบบน Pre-train BERT model**
+    - ขั้นตอนในการในการทดสอบ
+      - ขั้นตอนการจัดการกับข้อความที่ยาวเกินกว่า 512 tokens 
+        - <font color="salmon">Truncation methods </font> ซึ่งแนวคิดของวิธีนี้คือใจความสำคัญของประโยคนั้น จะอยู่ที่ต้นและท้ายประโยค จึงสามารถแบ่งวิธีการ truncate ได้อีก 3 วิธีย่อย ได้แก่
+          - head-only: ใช้เฉพาะ 510 token แรก
+          - tail-only: ใช้เฉพาะ 510 token หลัง
+          - head + tail: ใช้ 128 token แรก และ 382 token หลัง
+        - <font color="salmon"> Hierarchical methods </font> แนวคิดที่จะทำการแบ่งข้อความเป็น Fraction 
+          - ช่วงที่หนึ่งจะแบ่งเป็น k = L/510 fractions แล้วจึงนำแต่ละ fraction ไปผ่าน BERT model   
+            โดยผลลัพธ์จะอยู่ที่ hidden state ของ [CLS] 
+          - ช่วงที่สองจำผลลัพธ์ไปทำ max pooling และ self attention แล้วทำการรวมผลลัพธ์จากทุก fractions
+        
+---
+
+- ผลการทดสอบ Exp-I: dารจัดการกับข้อความที่ยาวเกินกว่า 512 tokens 
+
+<img class="size-content mx-auto" src="Result_Dealing_with_long_texts.png"/>
+
+<style>
+  .w-fit{
+    width: fit-content;
+  }
+  .size-content {
+    width: fit-content;
+    height: fit-content;
+  }
+</style>
+
+> จากการทดสอบด้วยชุดข้อมูล IMDb dataset และ Sogou (Chinese Sogou News Datasets ) ว่า Truncation methods, head + Tail ให้ผลลัพธ์ Test error rates (%) ที่ต่ำที่สุดจากทั้งสองชุดข้อมูล
+
+---
+
+- จุดประสงค์ในการทดสอบที่ 2 : **ขั้นตอนการจัดการกับ Features จาก layer ที่แตกต่างกันเนื่องจากในงานวิจัยนี้มีแนวคิดว่า layer ที่ต่างกันจะให้ feature ของประโยคที่แตกต่างกัน**
+
+ - ผลการทดสอบ Exp-I: การใช้ layer ที่ต่างกัน : 
+
+  <img src="Result_Fine_tuning_BERT_with_different_layers.png"/>
+
+  <style>
+   img{
+     max-height: 70%;
+     margin: 20px auto;
+    }
+  </style>
+
+> จากผลลัพธ์ที่ได้คือ Layer-11 (layer สุดท้ายของ transformers encoder)  ให้ผลลัพธ์ Test error rates(%) ที่ต่ำที่สุด
+
+---
+
+- จุดประสงค์ในการทดสอบที่ 3 : **ขั้นตอนการการจัดการปัญหาที่โมเดลลืมข้อมูลที่ pre-trained มาแล้ว หรือ Catastrophic forgetting**
+
+  - ขั้นตอนในการในการทดสอบ <font color="salmon">ปรับ Learning rate</font> 
+
+  <img src="Resualt_test_result.png"/>
+
+  <style>
+   img{
+     max-height: 70%;
+     margin: 20px auto;
+    }
+  </style>
+
+  > 2e-5 จะช่วยให้โมเดลไม่เกิด Error rate สูงแต่ถ้าหากค่า learning rate สูงเช่น 4e-4 จะพบปัญหา Error rate
+
+---
+
+- จุดประสงค์ในการทดสอบที่ 4 : **Layer-wise decreasing layer rate**
+
+  - ขั้นตอนในการในการทดสอบ <font color="salmon">การหาค่า Decay factor learning rate ที่ที่จะให้ Error rate น้อยและส่งผลต่อประสิทธิภาพ </font> 
+  <img src="Result_decay_factor.png"/>
+  <style>img{
+      max-height: 30%;
+      margin: 20px auto; 
+     }
+  </style>
+
+  > การกำหนดให้ layer ชั้นเริ่มต้นให้มีค่า learning rate น้อยๆ นั้นมีประสิทธิภาพและที่ Learning rate = 2.0e-5 และ decay factor = 0.95 นั้นให้ค่า error rate ที่ต่ำที่สุด
+
+--- 
+
+# Experiments
+  - Exp-II: Investigating Different Fine-Tuning Strategies
+
+  1. จุดประสงค์ในการทดสอบที่ 2 **ทดสอบปัญหาและหาค่า Hyperparameter ที่ให้ผลดีกับโมเดล**
+  2. ขั้นตอนในการในการทดสอบ
+    - <font color="salmon">Within-Task Further Pre-Training</font> 
+    - ใช้  BERT Pre-training model (BERT) เรียนรู้เพิ่มกับชุดข้อมูลเดิมแต่เป็น Target Task (Within-Task Pre-Training) (ITPT) และผลลัพธ์การ Fine-tune model (FiT) จากการทดลองที่หนึ่งทั้งหมด 100K Training Step (BERT-ITPT-FiT)
+
+    - <font color="salmon">In-Domain and Cross-Domain Further Pre-Training</font> 
+    - ใช้ BERT Pre-training model เรียนรู้กับ Target Task เพิ่มเติม โดยผู้วิจัยได้ใช้ seven English datasets แบ่งเป็นสามโดเมน ประกอบด้วย topic, sentiment และ question หลังจากนั้นเรียนรู้กับข้อมูลชุดใหม่ที่ Target Task ไม่มีความสำคัญเกี่ยวข้อง dชุดข้อมูล
+    ก่อนหน้านี้เลยทั้งหมด 7 ชุดข้อมูลทดสอบ
+
+    - <font color="salmon">Comparisons to Previous Models</font>
+    - ผู้วิจัยได้ทำการเปรียบเทียบโมเดลโดยแต่ละโมเดลมีจุดประสงค์ที่แตกต่างกัน โดยเฉพาะ ULMFiT ซึ่งเป็น state-of-art สำหรับการทำ Text-Classification กับโมเดล BERT ที่ผู้วิจัยได้พัฒนาขึ้นประกอบไปด้วย 
+
+      - BERT-Feat (“BERT as features” เป็นโมเดลที่ใช้ BERT เป็น input embedding ของ biLSTM ร่วมกับ self-attention)
+      - BERT-Fit (BERT + fine tuning)
+      -  BERT-ITPT-Fit (BERT + withIn-Task Pre-Training + Fine tuning)
+      - BERT-IDPT-Fit (BRTT + In-Domain Pre-Training + Fine tuning)
+      - BERT-CDPT-Fit (BERT + Cross-Domain Pre-Training + Fine tuning)
+
+---
+ผลการทดสอบ Exp-II: Within-Task Further Pre-Training : 
+
+<img src="Within_Task_Further_Pre_Training.png"/>
+
+<style>
+  img{
+    max-height: 70%;
+    margin: 20px auto;
+  }
+</style>
+
+ > ผลลัพธ์จากการ Fine-tune model (FiT) พบว่าการทดสอบทั้งหมด 100K Training Step (BERT-ITPT-FiT) ให้ผลลัพธ์ Test error (%) น้อยที่สุด
+ 
+---
+ผลการทดสอบ Exp-II: Investigating the Further Pre-training :
+
+<img src="In_Domain_and_Cross_Domain_Further_Pre_Training.png"/>
+
+<style>
+  img{
+    max-height: 50%;
+    margin: 20px auto;
+  }
+</style>>
+
+> All further pre-training (row ‘all’ in Table) ให้ผลลัพธ์ที่ดีกว่าการทำ BERT-base Model 
+  (row ‘w/o pretrain’ in table), สำหรับโดเมน Question ชุดข้อมูล TREC ที่มีขนาดเล็กมีประสิทธิภาพที่แย่มากแต่เมื่อใช้ชุดข้อมูล Yah. A ประสิทธิภาพจะดีที่สุด และการทำ Cross-domain pre-training (row ‘all’ in Table) ไม่ได้ทำให้เกิดประสิทธิภาพที่ดีให้กับโดเมน topic, sentiment และ question เลย เนื่องจากโมเดลทำงานได้ดีตั้งแต่ทดสอบกับโดเมนเริ่มต้นแล้ว
+  
+---
+ผลการทดสอบ Exp-II: Comparisons to Previous Models :
+
+<img src="Result_Comparisons_to_Previous_Models.png"/>
+
+<style>
+  img{
+    max-height: 50%;
+    margin: 20px auto;
+  }
+</style>>
+
+--- 
+
+# Experiments
+  - Exp-III: Multi-task Fine Tuning
+
+  1. จุดประสงค์ในการทดสอบที่ 3 **าShare Layer ในการทำ Task ที่แตกต่างกัน ด้วยใช้ 4 ชุดข้อมูล**
+  2. ข้อมูลที่ใช้ในการทดสอบ
+    - IMDb, Yelp P., AG และ DBP
+
+  <img src="Result_Multitask.png"/>
+
+  <style>
+    img{
+      max-height: 50%;
+      margin: 20px auto;
+   }
+  </style>>
+
+  > จากตารางพบว่า BERT-CDPT-FiT และ BERT-CDPT-MFit-Fit หรือ โมเดล BERT ที่ผ่านการทำ Multi-task โดยผ่าน In-Domain และ Cross-Domain (‘all sentiment’, ‘all question’, ‘all topic’) จากนั้นทำการ Fine-tuning ส่งผลให้ Test error rates ลดลง แต่ถ้าหากโมเดลที่ผ่านการ Multi-task หรือ Fine-tuning ไม่ส่งผลให้ Test error rates ลดลงเลยในทุกกรณี
+
+--- 
+
+  # Experiments
+  - Exp-IV: Few-Shot Learning
+  1. จุดประสงค์ในการทดสอบที่ 4 **ทดสอบ Pre-training model ดูว่าสามารถทำงานได้ดีกับชุดข้อมูลขนาดเล็กหรือไม่**
+
+  2. ข้อมูลที่ใช้ในการทดสอบ IMDb Dataset โดยใช้ข้อมูลแต่ 40% 
+
+  <img src="Result_EXP4.png"/>
+
+  <style>
+    img{
+      max-height: 50%;
+      margin: 20px auto;
+   }
+  </style>>
+
+  > จากผลลัพธ์จะเห็นว่า Test error rates สำหรับการทำ Further pre-trained BERT สามารถเพิ่มประสิทธิภาพจาก 17.26% ให้ลดลงเหลือ 9.23%
+
+  ---
+  # Experiments
+  - Exp-V: Further Pre-Training on BERT Large
+  1. จุดประสงค์ในการทดสอบที่ 5 **ทดสอบ การทดลองนี้ได้ลองทดสอบว่าถ้าหากให้ BERT Large ที่มีการใช้ทรัพยากรที่มากยิ่งขึ้นจะส่งผลให้ประสิทธิภาพดีขึ้นหรือไม่ โดยการเปรียบเทียบ ULMFiT ซึ่งเป็น state-of-art สำหรับการทำ Text-Classification กับโมเดล BERT base และBERT large ที่ผ่านการ Fine-Tuning ด้วย task-specific further pre-training ทั้งคู่**
+
+  2. ข้อมูลเบท้องต้นเกี่ยวกับ BERT base และ BERT Large
+    - BERT-base: 12 layers, 768 hidden units, 12 heads, ~110M parameters in total
+    - BERT-large: 24 layers, 1024 hidden units, 16 heads, ~340M parameters in total
+
+  <img src="Result_BERT_Lerge.png"/>
+
+  <style>
+    img{
+      max-height: 50%;
+      margin: 20px auto;
+   }
+  </style>>
+
+  > ผลลัพธ์จะเห็นว่า ULMFiT ที่เป็นโมเดลสำหรับ Text Classification โดยเฉพาะยังไม่สามารถเทียบผลลัพธ์กับ BERT base และ BERT large ได้ แต่ผลลัพธ์ของ BERT large ทำให้ได้ผลลัพธ์ที่ดีที่สุดในชุดข้อมูลทดสอบ แต่ต้องใช้ทรัพยากรในการคำนวณมากกว่า BERT base แน่นอนและใช้ทรัพยากรค่อนข้างสูง รวมถึงเวลาที่ใช้ในการคำนวณ ที่ค่อนข้างมีเวลานาน แต่ถ้ามองจากประสิทธิของโมเดล BERT large อาจมีความจำเป็นสำหรับบางงานที่ต้องการความถูกต้องและผลลัพธ์ออกมาดีที่สุด
+
+---
+
+ # Conclusion
+
+ งานวิจัยฉบับนี้ทำการทดลอง <font color="salmon">BERT for text classification
+ </font>ในหลากหลายวิธีการที่แตกต่างกัน ซึ่งทุกการทดลองเเสดงให้เห็นถึงข้อดี ข้อเสีย และข้อเปรียบเทียบกับโมเดลอื่น โดยสรุปเป็นใจความสำคัญได้ ดังนี้
+
+  1. Layer ชั้นบนสุดของโมเดล BERT เป็นชั้นที่เหมาะกับการทำ Text classification
+	2. การปรับ Learning rate ให้น้อยลงสามารถแก้ปัญหาที่เกิดขึ้นกับโมเดลได้	
+	3. การทำ Pre-training model ด้วย within-task และ in-domain ช่วยเพิ่มประสิทธิภาพใน		การทำโมเดล
+	4.  แม้ว่าการทำ Multi-task fine-tunningจะช่วยเพิ่มประสิทธิภาพในการประมวลผ
+	มากกว่า sigle-task fine-tunning แต่ผลลัพธ์ที่ได้ก็ยังไม่เียบเท่า further pre-traning
+	model
+	5. BERT สามารถประมวลผลได้ดีแม้ว่าชุดข้อมูลที่นำมาทดสอบจะมีขนาดเล็ก
+
+---
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        

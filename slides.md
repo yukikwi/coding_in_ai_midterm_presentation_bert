@@ -91,11 +91,11 @@ img {
 
 ---
 
-# Introduction - What is BERT
+# Introduction - What is Token
 
-> BERT หรือ Bidirectional Encoder Representations from Transformers เป็น model ที่ถูกพัฒนาโดยใช้ encoder ของ transformer โดยมีจุดประสงค์คือเพื่อเป็น language model ซึ่งจัดเป็น state-of-the-art language model โดย base model ถูกออกแบบมาเพื่อ predict คำที่หายไป
+> Transformer จะทำการเปลี่ยนประโยคไปเป็น token ก่อน เพื่อให้สะดวกต่อการทำงาน โดย Transformer จะทำการ break sentence ออกมาเป็น token จากนั้นจึงเพิ่ม token [CLS] และ [SEP] ที่ต้นและท้ายประโยค ก่อนจะนำไปคำนวณ id
 
-<img src="bert.webp" />
+<img src="bert_tokenize.png" />
 
 <style>
 img{
@@ -106,11 +106,11 @@ img{
 
 ---
 
-# Introduction - What is Token
+# Introduction - What is BERT
 
-> BERT จะทำการเปลี่ยนประโยคไปเป็น token ก่อน เพื่อให้สะดวกต่อการทำงาน โดย BERT จะทำการ break sentence ออกมาเป็น token จากนั้นจึงเพิ่ม token [CLS] และ [SEP] ที่ต้นและท้ายประโยค ก่อนจะนำไปคำนวณ id
+> BERT หรือ Bidirectional Encoder Representations from Transformers เป็น model ที่ถูกพัฒนาโดยใช้ encoder ของ transformer โดยมีจุดประสงค์คือเพื่อเป็น language model ซึ่งจัดเป็น state-of-the-art language model โดย base model ถูกออกแบบมาเพื่อ predict คำที่หายไป
 
-<img src="bert_tokenize.png" />
+<img src="bert.webp" />
 
 <style>
 img{

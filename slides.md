@@ -2,7 +2,7 @@
 # try also 'default' to start simple
 theme: seriph
 # apply any windi css classes to the current slide
-class: 'text-center, h-5/7, mx-auto, flex, items-center'
+class: 'text-center, h-5/7, mx-auto, flex, items-center, grid, grid-cols-2'
 # https://sli.dev/custom/highlighters.html
 highlighter: shiki
 # show line numbers in code blocks
@@ -328,7 +328,20 @@ img{
 - จุดประสงค์ในการทดสอบที่ 4 : **Layer-wise decreasing layer rate**
 
   - ขั้นตอนในการในการทดสอบ <font color="salmon">การหาค่า Decay factor learning rate ที่ที่จะให้ Error rate น้อยและส่งผลต่อประสิทธิภาพ </font> 
-  <img src="Result_decay_factor.png"/>
+  
+  <div class="grid grid-cols-2">
+    <div>
+      <img src="Result_decay_factor.png"/>
+    </div>
+    <div>
+
+  ```python
+    def decay_factor(learning_rate, decay_factor, iters):
+     return learning_rate * (1/1 + decay_factor * iters)
+  ```
+
+    </div>
+  </div>
 
   > การกำหนดให้ layer ชั้นเริ่มต้นให้มีค่า learning rate น้อยๆ นั้นมีประสิทธิภาพและที่ Learning rate = 2.0e-5 และ decay factor = 0.95 นั้นให้ค่า error rate ที่ต่ำที่สุด
 
@@ -336,6 +349,9 @@ img{
   img{
     height: 25vh;
     margin: 20px auto; 
+  }
+  code {
+    font-size: 12px;
   }
 </style>
 

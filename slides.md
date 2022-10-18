@@ -508,5 +508,3 @@ img{
   - 3. การทำ Pre-training model ด้วย within-task และ in-domain ช่วยเพิ่มประสิทธิภาพใน		การทำโมเดล
   - 4. แม้ว่าการทำ Multi-task fine-tunning จะช่วยเพิ่มประสิทธิภาพในการประมวลผลมากกว่า sigle-task <br /> fine-tunning แต่ผลลัพธ์ที่ได้ก็ยังไม่เทียบเท่า further pre-traning model
   - 5. BERT สามารถประมวลผลได้ดีแม้ว่าชุดข้อมูลที่นำมาทดสอบจะมีขนาดเล็ก
-
----

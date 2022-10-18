@@ -2,7 +2,7 @@
 # try also 'default' to start simple
 theme: seriph
 # apply any windi css classes to the current slide
-class: 'text-center, h-5/7, mx-auto, flex, items-center, grid, grid-cols-2'
+class: 'text-center, h-5/7, mx-auto, flex, items-center'
 # https://sli.dev/custom/highlighters.html
 highlighter: shiki
 # show line numbers in code blocks
@@ -324,7 +324,8 @@ img{
   > 2e-5 จะช่วยให้โมเดลไม่เกิด Error rate สูงแต่ถ้าหากค่า learning rate สูงเช่น 4e-4 จะพบปัญหา Error rate
 
 ---
-
+class: 'grid, grid-cols-2'
+---
 - จุดประสงค์ในการทดสอบที่ 4 : **Layer-wise decreasing layer rate**
 
   - ขั้นตอนในการในการทดสอบ <font color="salmon">การหาค่า Decay factor learning rate ที่ที่จะให้ Error rate น้อยและส่งผลต่อประสิทธิภาพ </font> 

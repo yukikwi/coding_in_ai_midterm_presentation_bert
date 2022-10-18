@@ -506,7 +506,7 @@ img{
   - 1. Layer ชั้น 11 (หรือเรียงจาก input ที่อยู่ขึ้นล่างสุด Layer 0 - Layer11) ของโมเดล BERT เป็นชั้นที่เหมาะกับการทำ Text classification
   - 2. การปรับ Learning rate ให้น้อยลงสามารถแก้ปัญหาที่เกิดขึ้นกับโมเดลได้	
   - 3. การทำ Pre-training model ด้วย within-task และ in-domain ช่วยเพิ่มประสิทธิภาพใน		การทำโมเดล
-  - 4. แม้ว่าการทำ Multi-task fine-tunningจะช่วยเพิ่มประสิทธิภาพในการประมวลผลมากกว่า sigle-task <br /> fine-tunning แต่ผลลัพธ์ที่ได้ก็ยังไม่เียบเท่า further pre-traning model
+  - 4. แม้ว่าการทำ Multi-task fine-tunning จะช่วยเพิ่มประสิทธิภาพในการประมวลผลมากกว่า sigle-task <br /> fine-tunning แต่ผลลัพธ์ที่ได้ก็ยังไม่เทียบเท่า further pre-traning model
   - 5. BERT สามารถประมวลผลได้ดีแม้ว่าชุดข้อมูลที่นำมาทดสอบจะมีขนาดเล็ก
 
 ---

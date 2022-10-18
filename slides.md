@@ -2,7 +2,7 @@
 # try also 'default' to start simple
 theme: seriph
 # apply any windi css classes to the current slide
-class: 'text-center, h-5/7, mx-auto, flex, items-center'
+class: 'text-center, h-4/7, mx-auto, flex, items-center'
 # https://sli.dev/custom/highlighters.html
 highlighter: shiki
 # show line numbers in code blocks
@@ -54,6 +54,7 @@ h1 {
 
 <img src="introduction.png" />
 <span>But why not used CNNs & RNN?</span>
+<small>Image reference: https://dennybritz.com/posts/wildml/understanding-convolutional-neural-networks-for-nlp/, https://www.bualabs.com/archives/3103/what-is-rnn-recurrent-neural-network-what-is-gru-gated-recurrent-unit-teach-how-to-build-rnn-gru-with-python-nlp-ep-9/, https://www.analyticsvidhya.com/blog/2019/06/understanding-transformers-nlp-state-of-the-art-models/, https://papayiw.com/google-bert/</small>
 
 <style>
 img {
@@ -64,6 +65,10 @@ span {
   text-align: center;
   width: 100%;
   display: block;
+}
+small{
+  font-size: .5em;
+  color: gray;
 }
 </style>
 
@@ -82,10 +87,18 @@ src: ./slides/introduction_problems_of_rnn.md
 
 <img src="self_attention.png" />
 
+<small>
+Image reference: https://jalammar.github.io/illustrated-transformer/
+</small>
+
 <style>
 img {
   max-height: 70%;
   margin: 20px auto;
+}
+small{
+  font-size: .5em;
+  color: gray;
 }
 </style>
 
@@ -96,11 +109,18 @@ img {
 > Transformer จะทำการเปลี่ยนประโยคไปเป็น token ก่อน เพื่อให้สะดวกต่อการทำงาน โดย Transformer จะทำการ break sentence ออกมาเป็น token จากนั้นจึงเพิ่ม token [CLS] และ [SEP] ที่ต้นและท้ายประโยค ก่อนจะนำไปคำนวณ id
 
 <img src="bert_tokenize.png" />
+<small>
+Image reference: https://satish1v.medium.com/tokenization-for-bert-models-5c20734d1aca
+</small>
 
 <style>
 img{
   max-height: 70%;
   margin: 20px auto;
+}
+small{
+  font-size: .5em;
+  color: gray;
 }
 </style>
 
@@ -111,11 +131,18 @@ img{
 > BERT หรือ Bidirectional Encoder Representations from Transformers เป็น model ที่ถูกพัฒนาโดยใช้ encoder ของ transformer โดยมีจุดประสงค์คือเพื่อเป็น language model ซึ่งจัดเป็น state-of-the-art language model โดย base model ถูกออกแบบมาเพื่อ predict คำที่หายไป
 
 <img src="bert.webp" />
+<small>
+Image reference: https://www.codemotion.com/magazine/ai-ml/bert-how-google-changed-nlp-and-how-to-benefit-from-this/
+</small>
 
 <style>
 img{
   max-height: 70%;
   margin: 20px auto;
+}
+small{
+  font-size: .5em;
+  color: gray;
 }
 </style>
 
@@ -135,12 +162,19 @@ img{
 <div class="flex h-5/7 my-3">
   <img class="mx-auto content-center" src="pre_trained.png" />
 </div>
+<small>
+Image reference: https://towardsdatascience.com/pre-trained-language-models-simplified-b8ec80c62217
+</small>
 
 <style>
   .my-3{
     margin-top: 0.75rem;
     margin-bottom: 0.75rem;
   }
+small{
+  font-size: .5em;
+  color: gray;
+}
 </style>
 
 ---
@@ -148,15 +182,22 @@ img{
 # Theory - Multi-task learning
 > เป็นการ **Share layers** ของโมเดลในการทำ **Task ที่แตกต่างกัน**ทำให้โมเดลไม่จำเป็นต้องเรียนรู้ใหม่ตั้งแต่เริ่มต้น ซึ่งมีส่งผลต่อประสิทธิภาพทำให้ประหยัดเวลาและทรัพยากรในการประมวลผล ในงานวิจัยฉบับนี้ได้ใช้ **BERT Pre-training model** เป็น Multi-task learning ในการ Share Pre-traning model
 
-<div class="flex h-5/7 my-3">
+<div class="flex h-4/7 my-3">
   <img class="mx-auto content-center" src="multitask_learning.png" />
 </div>
+<small>
+Image reference: https://link.springer.com/article/10.1007/s11042-018-6463-x
+</small>
 
 <style>
   .my-3{
     margin-top: 0.75rem;
     margin-bottom: 0.75rem;
   }
+  small{
+  font-size: .5em;
+  color: gray;
+}
 </style>
 
 ---

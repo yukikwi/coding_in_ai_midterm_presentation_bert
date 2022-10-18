@@ -27,6 +27,10 @@
   -webkit-text-fill-color: transparent;
   -moz-text-fill-color: transparent;
 }
+html.dark .gradient-gray-black{
+  background-color: #fff;
+  background-image: linear-gradient(45deg, #555, #fff);
+}
 svg{
   display: block;
   margin: 20px auto;

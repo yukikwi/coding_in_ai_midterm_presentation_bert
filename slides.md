@@ -1,11 +1,8 @@
 ---
 # try also 'default' to start simple
 theme: seriph
-# random image from a curated Unsplash collection by Anthony
-# like them? see https://unsplash.com/collections/94734566/slidev
-background: https://source.unsplash.com/collection/94734566/1920x1080
 # apply any windi css classes to the current slide
-class: 'text-center, h-5/7, mx-auto, flex, items-center, my-3'
+class: 'text-center, h-5/7, mx-auto, flex, items-center'
 # https://sli.dev/custom/highlighters.html
 highlighter: shiki
 # show line numbers in code blocks
@@ -31,6 +28,7 @@ Coding in AI Midterm exam presentation
 - **Introduction**
 - **Theory**
 - **Experimental Design and Results**
+- **Experiments**
 - **Conclusion**
 
 <!--
@@ -108,6 +106,21 @@ img{
 
 ---
 
+# Introduction - What is Token
+
+> BERT จะทำการเปลี่ยนประโยคไปเป็น token ก่อน เพื่อให้สะดวกต่อการทำงาน โดย BERT จะทำการ break sentence ออกมาเป็น token จากนั้นจึงเพิ่ม token [CLS] และ [SEP] ที่ต้นและท้ายประโยค ก่อนจะนำไปคำนวณ id
+
+<img src="bert_tokenize.png" />
+
+<style>
+img{
+  max-height: 70%;
+  margin: 20px auto;
+}
+</style>
+
+---
+
 # Theory
 
   - Language Model Pre-training
@@ -122,6 +135,14 @@ img{
 <div class="flex h-5/7 my-3">
   <img class="mx-auto content-center" src="pre_trained.png" />
 </div>
+
+<style>
+  .my-3{
+    margin-top: 0.75rem;
+    margin-bottom: 0.75rem;
+  }
+</style>
+
 ---
 
 # Theory - Multi-task learning
@@ -130,6 +151,13 @@ img{
 <div class="flex h-5/7 my-3">
   <img class="mx-auto content-center" src="multitask_learning.png" />
 </div>
+
+<style>
+  .my-3{
+    margin-top: 0.75rem;
+    margin-bottom: 0.75rem;
+  }
+</style>
 
 ---
 
@@ -175,7 +203,7 @@ img{
 
   - 2. Further Pre-training: เป็นการให้โมเดลเรียนรู้ข้อมูลที่อยู่ใน Target domain เพิ่มเติมเพื่อให้โมเดลมีความสามารถแยกแยะข้อความมากขึ้น
     - 2.1 Within-task pre-training: ใช้  Pre-training model เรียนรู้เพิ่มกับชุดข้อมูลเดิมแต่เป็น Target Task
-    - 2.2 In-domain  pre-training: หลักจากที่ทำการ Pre-training model เรียนรู้กับ Target Task เพิ่มเติมแล้วต้องทดสอบกับ Tarket Task ที่หลากหลายมากขึ้นแต่ยังคงเป็นชุดข้อมูลเดิมอยู่
+    - 2.2 In-domain  pre-training: หลักจากที่ทำการ Pre-training model เรียนรู้กับ Target Task เพิ่มเติมแล้วต้องทดสอบกับ Target Task ที่หลากหลายมากขึ้นแต่ยังคงเป็นชุดข้อมูลเดิมอยู่
     - 2.3 Cross-domain pre-training: เรียนรู้กับข้อมูลชุดใหม่ที่ Target Task ไม่มีความสำคัญเกี่ยวข้องชุดข้อมูลก่อน
 หน้านี้เลยรวมกับชุดที่เคยเรียนแล้ว
 
@@ -322,17 +350,23 @@ img{
         ใช้ BERT Pre-training model (BERT) เรียนรู้เพิ่มกับชุดข้อมูลเดิมแต่เป็น Target Task (Within-Task Pre-Training) (ITPT) และผลลัพธ์การ Fine-tune model (FiT) จากการทดลองที่หนึ่งทั้งหมด 100K Training Step (BERT-ITPT-FiT)
 
       - <font color="salmon">In-Domain and Cross-Domain Further Pre-Training</font> 
-        ใช้ BERT Pre-training model เรียนรู้กับ Target Task เพิ่มเติม โดยผู้วิจัยได้ใช้ seven English datasets แบ่งเป็นสามโดเมน ประกอบด้วย topic, sentiment และ question หลังจากนั้นเรียนรู้กับข้อมูลชุดใหม่ที่ Target Task ไม่มีความสำคัญเกี่ยวข้อง dชุดข้อมูล
+        ใช้ BERT Pre-training model เรียนรู้กับ Target Task เพิ่มเติม โดยผู้วิจัยได้ใช้ seven English datasets แบ่งเป็นสามโดเมน ประกอบด้วย topic, sentiment และ question หลังจากนั้นเรียนรู้กับข้อมูลชุดใหม่ที่ Target Task ไม่มีความสำคัญเกี่ยวข้องกับชุดข้อมูล
       ก่อนหน้านี้เลยทั้งหมด 7 ชุดข้อมูลทดสอบ
 
-      - <font color="salmon">Comparisons to Previous Models</font>
-        ผู้วิจัยได้ทำการเปรียบเทียบโมเดลโดยแต่ละโมเดลมีจุดประสงค์ที่แตกต่างกัน โดยเฉพาะ ULMFiT ซึ่งเป็น state-of-art สำหรับการทำ Text-Classification กับโมเดล BERT ที่ผู้วิจัยได้พัฒนาขึ้นประกอบไปด้วย 
+---
 
-        - BERT-Feat (“BERT as features” เป็นโมเดลที่ใช้ BERT เป็น input embedding ของ biLSTM ร่วมกับ self-attention)
-        - BERT-Fit (BERT + fine tuning)
-        - BERT-ITPT-Fit (BERT + withIn-Task Pre-Training + Fine tuning)
-        - BERT-IDPT-Fit (BRTT + In-Domain Pre-Training + Fine tuning)
-        - BERT-CDPT-Fit (BERT + Cross-Domain Pre-Training + Fine tuning)
+# Experiments
+- Exp-II: Investigating Different Fine-Tuning Strategies
+
+  - 2. ขั้นตอนในการในการทดสอบ (ต่อ)
+    - <font color="salmon">Comparisons to Previous Models</font>
+      ผู้วิจัยได้ทำการเปรียบเทียบโมเดลโดยแต่ละโมเดลมีจุดประสงค์ที่แตกต่างกัน โดยเฉพาะ ULMFiT ซึ่งเป็น state-of-art สำหรับการทำ Text-Classification กับโมเดล BERT ที่ผู้วิจัยได้พัฒนาขึ้นประกอบไปด้วย
+
+      - BERT-Feat (“BERT as features” เป็นโมเดลที่ใช้ BERT เป็น input embedding ของ biLSTM ร่วมกับ self-attention)
+      - BERT-Fit (BERT + fine tuning)
+      - BERT-ITPT-Fit (BERT + withIn-Task Pre-Training + Fine tuning)
+      - BERT-IDPT-Fit (BRTT + In-Domain Pre-Training + Fine tuning)
+      - BERT-CDPT-Fit (BERT + Cross-Domain Pre-Training + Fine tuning)
 
 ---
 

@@ -52,7 +52,7 @@ h1 {
 
 # Introduction
 
-<img src="introduction.png" />
+<img src="/introduction.png" />
 <span>But why not used CNNs & RNN?</span>
 <small>Image reference: https://dennybritz.com/posts/wildml/understanding-convolutional-neural-networks-for-nlp/, https://www.bualabs.com/archives/3103/what-is-rnn-recurrent-neural-network-what-is-gru-gated-recurrent-unit-teach-how-to-build-rnn-gru-with-python-nlp-ep-9/, https://www.analyticsvidhya.com/blog/2019/06/understanding-transformers-nlp-state-of-the-art-models/, https://papayiw.com/google-bert/</small>
 
@@ -85,7 +85,7 @@ src: ./slides/introduction_problems_of_rnn.md
 
 > Transformer คือ architecture ทาง NLP ที่ออกแบบมาเพื่อแก้ปัญหาของ CNNs และ RNN โดยใช้สิ่งที่เรียกว่า Self-Attention ซึ่งเป็นการให้ความสำคัญกับความสัมพันธ์ระหว่างคำในประโยค
 
-<img src="self_attention.png" />
+<img src="/self_attention.png" />
 
 <small>
 Image reference: https://jalammar.github.io/illustrated-transformer/
@@ -108,7 +108,7 @@ small{
 
 > Transformer จะทำการเปลี่ยนประโยคไปเป็น token ก่อน เพื่อให้สะดวกต่อการทำงาน โดย Transformer จะทำการ break sentence ออกมาเป็น token จากนั้นจึงเพิ่ม token [CLS] และ [SEP] ที่ต้นและท้ายประโยค ก่อนจะนำไปคำนวณ id
 
-<img src="bert_tokenize.png" />
+<img src="/bert_tokenize.png" />
 <small>
 Image reference: https://satish1v.medium.com/tokenization-for-bert-models-5c20734d1aca
 </small>
@@ -130,7 +130,7 @@ small{
 
 > BERT หรือ Bidirectional Encoder Representations from Transformers เป็น model ที่ถูกพัฒนาโดยใช้ encoder ของ transformer โดยมีจุดประสงค์คือเพื่อเป็น language model ซึ่งจัดเป็น state-of-the-art language model โดย base model ถูกออกแบบมาเพื่อ predict คำที่หายไป
 
-<img src="bert.webp" />
+<img src="/bert.webp" />
 <small>
 Image reference: https://www.codemotion.com/magazine/ai-ml/bert-how-google-changed-nlp-and-how-to-benefit-from-this/
 </small>
@@ -160,7 +160,7 @@ small{
 > language model ที่ผ่านการเรียนรู้มาแล้วด้วยข้อมูลมาแล้ว โดยในงานวิจัยนี้ได้เลือกใช้ **BERT Pre-training model** ซึ่งเป็นโมเดลแบบ **Unsupervised Learning** ที่เรียนรู้ผ่านชุดข้อมูลที่ใช้ไม่จำเป็นต้องมี Label อะไร 
 
 <div class="flex h-5/7 my-3">
-  <img class="mx-auto content-center" src="pre_trained.png" />
+  <img class="mx-auto content-center" src="/pre_trained.png" />
 </div>
 <small>
 Image reference: https://towardsdatascience.com/pre-trained-language-models-simplified-b8ec80c62217
@@ -183,7 +183,7 @@ small{
 > เป็นการ **Share layers** ของโมเดลในการทำ **Task ที่แตกต่างกัน**ทำให้โมเดลไม่จำเป็นต้องเรียนรู้ใหม่ตั้งแต่เริ่มต้น ซึ่งมีส่งผลต่อประสิทธิภาพทำให้ประหยัดเวลาและทรัพยากรในการประมวลผล ในงานวิจัยฉบับนี้ได้ใช้ **BERT Pre-training model** เป็น Multi-task learning ในการ Share Pre-traning model
 
 <div class="flex h-4/7 my-3">
-  <img class="mx-auto content-center" src="multitask_learning.png" />
+  <img class="mx-auto content-center" src="/multitask_learning.png" />
 </div>
 <small>
 Image reference: https://link.springer.com/article/10.1007/s11042-018-6463-x
@@ -207,7 +207,7 @@ Image reference: https://link.springer.com/article/10.1007/s11042-018-6463-x
 
 > โดยจะมีการใช้ Softmax เป็น activation function ใน layer สุดท้ายเพื่อทำ classification โดยจะทำการคำนวนจาก hidden state ของ token **[CLS]** ดังสมการ
 
-<img class="size-content mx-auto" src="equation_softmax.png" />
+<img class="size-content mx-auto" src="/equation_softmax.png" />
 
 <div class="mx-auto w-fit">
   <ul>
@@ -318,7 +318,7 @@ Image reference: https://link.springer.com/article/10.1007/s11042-018-6463-x
 
 - ผลการทดสอบ Exp-I: dารจัดการกับข้อความที่ยาวเกินกว่า 512 tokens 
 
-<img class="size-content mx-auto" src="Result_Dealing_with_long_texts.png"/>
+<img class="size-content mx-auto" src="/Result_Dealing_with_long_texts.png"/>
 
 <style>
   .w-fit{
@@ -339,7 +339,7 @@ Image reference: https://link.springer.com/article/10.1007/s11042-018-6463-x
 
  - ผลการทดสอบ Pre-train BERT Strategies 2: 
 
-  <img src="Result_Fine_tuning_BERT_with_different_layers.png"/>
+  <img src="/Result_Fine_tuning_BERT_with_different_layers.png"/>
 
 <style>
 img{
@@ -357,7 +357,7 @@ img{
 
   ขั้นตอนในการในการทดสอบ <font color="salmon">ปรับ Learning rate</font> 
 
-  <img src="Resualt_test_result.png"/>
+  <img src="/Resualt_test_result.png"/>
 
 <style>
   img{
@@ -377,7 +377,7 @@ class: 'grid, grid-cols-2'
   
   <div class="grid grid-cols-2">
     <div>
-      <img src="Result_decay_factor.png"/>
+      <img src="/Result_decay_factor.png"/>
     </div>
     <div>
 
@@ -434,7 +434,7 @@ class: 'grid, grid-cols-2'
 
 ผลการทดสอบ Exp-II: Within-Task Further Pre-Training
 
-<img src="Within_Task_Further_Pre_Training.png"/>
+<img src="/Within_Task_Further_Pre_Training.png"/>
 
 > ผลลัพธ์จากการ Fine-tune model (FiT) พบว่าการทดสอบทั้งหมด 100K Training Step (BERT-ITPT-FiT) ให้ผลลัพธ์ Test error (%) น้อยที่สุด
 
@@ -449,7 +449,7 @@ class: 'grid, grid-cols-2'
 
 ผลการทดสอบ Exp-II: Investigating the Further Pre-training
 
-<img src="In_Domain_and_Cross_Domain_Further_Pre_Training.png"/>
+<img src="/In_Domain_and_Cross_Domain_Further_Pre_Training.png"/>
 
 > All further pre-training (row ‘all’ in Table) ให้ผลลัพธ์ที่ดีกว่าการทำ BERT-base Model 
   (row ‘w/o pretrain’ in table), สำหรับโดเมน Question ชุดข้อมูล TREC ที่มีขนาดเล็กมีประสิทธิภาพที่แย่มากแต่เมื่อใช้ชุดข้อมูล Yah. A ประสิทธิภาพจะดีที่สุด และการทำ Cross-domain pre-training (row ‘all’ in Table) ไม่ได้ทำให้เกิดประสิทธิภาพที่ดีให้กับโดเมน topic, sentiment และ question เลย เนื่องจากโมเดลทำงานได้ดีตั้งแต่ทดสอบกับโดเมนเริ่มต้นแล้ว
@@ -466,7 +466,7 @@ img {
 
 ผลการทดสอบ Exp-II: Comparisons to Previous Models :
 
-<img src="Result_Comparisons_to_Previous_Models.png"/>
+<img src="/Result_Comparisons_to_Previous_Models.png"/>
 
 <style>
   img{
@@ -484,7 +484,7 @@ img {
   2. ข้อมูลที่ใช้ในการทดสอบ
     - IMDb, Yelp P., AG และ DBP
 
-  <img src="Result_Multitask.png"/>
+  <img src="/Result_Multitask.png"/>
 
 <style>
   img{
@@ -503,7 +503,7 @@ img {
 
   2. ข้อมูลที่ใช้ในการทดสอบ IMDb Dataset โดยใช้ข้อมูลแต่ 40% 
 
-  <img src="Result_EXP4.png"/>
+  <img src="/Result_EXP4.png"/>
 
 <style>
   img{
@@ -527,7 +527,7 @@ img {
 
 ---
 
-<img src="Result_BERT_Large.png"/>
+<img src="/Result_BERT_Large.png"/>
 
 <style>
 img{

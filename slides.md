@@ -259,16 +259,15 @@ img{
   - Exp-I: Investigating Different Fine-Tuning Strategies
 
  1. ชุดทดสอบ: **IMDb dataset** 
-    - จุดประสงค์ในการทดสอบที่ 1 : **Fine-tune โดยทดสอบบน Pre-train BERT model**
+    - จุดประสงค์ในการทดสอบที่ 1 : **ทดสอบ Pre-train BERT Strategies**
     - ขั้นตอนในการในการทดสอบ
-      - ขั้นตอนการจัดการกับข้อความที่ยาวเกินกว่า 512 tokens 
+      - การทดสอบ Pre-train BERT Strategies 1 : การจัดการกับข้อความที่ยาวเกินกว่า 512 tokens 
         - <font color="salmon">Truncation methods </font> ซึ่งแนวคิดของวิธีนี้คือใจความสำคัญของประโยคนั้น จะอยู่ที่ต้นและท้ายประโยค จึงสามารถแบ่งวิธีการ truncate ได้อีก 3 วิธีย่อย ได้แก่
           - head-only: ใช้เฉพาะ 510 token แรก
           - tail-only: ใช้เฉพาะ 510 token หลัง
           - head + tail: ใช้ 128 token แรก และ 382 token หลัง
-        - <font color="salmon"> Hierarchical methods </font> แนวคิดที่จะทำการแบ่งข้อความเป็น Fraction 
-          - ช่วงที่หนึ่งจะแบ่งเป็น k = L/510 fractions แล้วจึงนำแต่ละ fraction ไปผ่าน BERT model   
-            โดยผลลัพธ์จะอยู่ที่ hidden state ของ [CLS] 
+        - การทดสอบที่ 2 : <font color="salmon"> Hierarchical methods </font> แนวคิดที่จะทำการแบ่งข้อความเป็น Fraction 
+          - ช่วงที่หนึ่งจะแบ่งเป็น k = L/510 fractions แล้วจึงนำแต่ละ fraction ไปผ่าน BERT model โดยผลลัพธ์จะอยู่ที่ hidden state ของ [CLS] 
           - ช่วงที่สองจำผลลัพธ์ไปทำ max pooling และ self attention แล้วทำการรวมผลลัพธ์จากทุก fractions
         
 ---
@@ -291,9 +290,10 @@ img{
 
 ---
 
-- จุดประสงค์ในการทดสอบที่ 2 : **ขั้นตอนการจัดการกับ Features จาก layer ที่แตกต่างกันเนื่องจากในงานวิจัยนี้มีแนวคิดว่า layer ที่ต่างกันจะให้ feature ของประโยคที่แตกต่างกัน**
+- การทดสอบ Pre-train BERT Strategies 2 : **Feature From Differrent layers**
+ขั้นตอนการจัดการกับ Features จาก layer ที่แตกต่างกันเนื่องจากในงานวิจัยนี้มีแนวคิดว่า layer ที่ต่างกันจะให้ feature ของประโยคที่แตกต่างกัน**
 
- - ผลการทดสอบ Exp-I: การใช้ layer ที่ต่างกัน : 
+ - ผลการทดสอบ Pre-train BERT Strategies 2: 
 
   <img src="Result_Fine_tuning_BERT_with_different_layers.png"/>
 
@@ -308,9 +308,10 @@ img{
 
 ---
 
-- จุดประสงค์ในการทดสอบที่ 3 : **ขั้นตอนการการจัดการปัญหาที่โมเดลลืมข้อมูลที่ pre-trained มาแล้ว หรือ Catastrophic forgetting**
+- การทดสอบ Pre-train BERT Strategies 3 : **Catastrophic forgetting**
+ขั้นตอนการการจัดการปัญหาที่โมเดลลืมข้อมูลที่ pre-trained มาแล้ว หรือ Catastrophic forgetting**
 
-  - ขั้นตอนในการในการทดสอบ <font color="salmon">ปรับ Learning rate</font> 
+  ขั้นตอนในการในการทดสอบ <font color="salmon">ปรับ Learning rate</font> 
 
   <img src="Resualt_test_result.png"/>
 
@@ -326,9 +327,9 @@ img{
 ---
 class: 'grid, grid-cols-2'
 ---
-- จุดประสงค์ในการทดสอบที่ 4 : **Layer-wise decreasing layer rate**
+- การทดสอบ Pre-train BERT Strategies 4 : **Layer-wise decreasing layer rate**
 
-  - ขั้นตอนในการในการทดสอบ <font color="salmon">การหาค่า Decay factor learning rate ที่ที่จะให้ Error rate น้อยและส่งผลต่อประสิทธิภาพ </font> 
+  ขั้นตอนในการในการทดสอบ <font color="salmon">การหาค่า Decay factor learning rate ที่ที่จะให้ Error rate น้อยและส่งผลต่อประสิทธิภาพ </font> 
   
   <div class="grid grid-cols-2">
     <div>
@@ -359,9 +360,9 @@ class: 'grid, grid-cols-2'
 --- 
 
 # Experiments
-  - Exp-II: Investigating Different Fine-Tuning Strategies
+  - Exp-II: Investigating the Further Pretraining
 
-    - 1. จุดประสงค์ในการทดสอบที่ 2 **ทดสอบปัญหาและหาค่า Hyperparameter ที่ให้ผลดีกับโมเดล**
+    - 1. จุดประสงค์ในการทดสอบที่ 2 หลังจากได้ทดสอบทดสอบปัญหาและหาค่า Hyperparameter ที่ให้ผลดีกับโมเดลในการทายประโยคถัดไปด้วย BERT Pre-training model แล้ว **การทดลองที่ 2 นี้จะเกี่ยวกับการปรับโมเดลจากการทายคำที่ขาดหายไปให้ใช้งานได้สำหรับการทำ Text Classification**
     - 2. ขั้นตอนในการในการทดสอบ
       - <font color="salmon">Within-Task Further Pre-Training</font> 
         ใช้ BERT Pre-training model (BERT) เรียนรู้เพิ่มกับชุดข้อมูลเดิมแต่เป็น Target Task (Within-Task Pre-Training) (ITPT) และผลลัพธ์การ Fine-tune model (FiT) จากการทดลองที่หนึ่งทั้งหมด 100K Training Step (BERT-ITPT-FiT)
@@ -479,6 +480,9 @@ img {
   - BERT-base: 12 layers, 768 hidden units, 12 heads, ~110M parameters in total
   - BERT-large: 24 layers, 1024 hidden units, 16 heads, ~340M parameters in total
 
+
+---
+
 <img src="Result_BERT_Large.png"/>
 
 <style>
@@ -496,7 +500,7 @@ img{
 
  งานวิจัยฉบับนี้ทำการทดลอง <font color="salmon">BERT for text classification</font> ในหลากหลายวิธีการที่แตกต่างกัน ซึ่งทุกการทดลองเเสดงให้เห็นถึงข้อดี ข้อเสีย และข้อเปรียบเทียบกับโมเดลอื่น โดยสรุปเป็นใจความสำคัญได้ ดังนี้
 
-  - 1. Layer ชั้นบนสุดของโมเดล BERT เป็นชั้นที่เหมาะกับการทำ Text classification
+  - 1. Layer ชั้น 11 (หรือเรียงจาก input ที่อยู่ขึ้นล่างสุด Layer 0 - Layer11) ของโมเดล BERT เป็นชั้นที่เหมาะกับการทำ Text classification
   - 2. การปรับ Learning rate ให้น้อยลงสามารถแก้ปัญหาที่เกิดขึ้นกับโมเดลได้	
   - 3. การทำ Pre-training model ด้วย within-task และ in-domain ช่วยเพิ่มประสิทธิภาพใน		การทำโมเดล
   - 4. แม้ว่าการทำ Multi-task fine-tunningจะช่วยเพิ่มประสิทธิภาพในการประมวลผลมากกว่า sigle-task <br /> fine-tunning แต่ผลลัพธ์ที่ได้ก็ยังไม่เียบเท่า further pre-traning model

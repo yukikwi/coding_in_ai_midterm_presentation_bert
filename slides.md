@@ -202,15 +202,14 @@ img{
     - 1.3. ต้องเลือก optimizers และ learning rate ให้เหมาะสมเพื่อป้องกันการ overfit
 
   - 2. Further Pre-training: เป็นการให้โมเดลเรียนรู้ข้อมูลที่อยู่ใน Target domain เพิ่มเติมเพื่อให้โมเดลมีความสามารถแยกแยะข้อความมากขึ้น
-    - 2.1 Within-task pre-training: ใช้  Pre-training model เรียนรู้เพิ่มกับชุดข้อมูลเดิมแต่เป็น Target Task
-    - 2.2 In-domain  pre-training: หลักจากที่ทำการ Pre-training model เรียนรู้กับ Target Task เพิ่มเติมแล้วต้องทดสอบกับ Target Task ที่หลากหลายมากขึ้นแต่ยังคงเป็นชุดข้อมูลเดิมอยู่
-    - 2.3 Cross-domain pre-training: เรียนรู้กับข้อมูลชุดใหม่ที่ Target Task ไม่มีความสำคัญเกี่ยวข้องชุดข้อมูลก่อน
-หน้านี้เลยรวมกับชุดที่เคยเรียนแล้ว
+    - 2.1 Within-task pre-training
+    - 2.2 In-domain  pre-training
+    - 2.3 Cross-domain pre-training
 
 ---
 
 # Experimental Design and Results - Methadology
-  - 3. Multi-Task Fine-Tuning: เนื่องจากหัวข้อ Multi-task learning งานวิจัยนี้ได้ทำการ Share Layer ในการทำ Task ที่แตกต่างกันซึ่งสอดคล้องกับงานวิจัยของเราที่มีการเปลี่ยน task ของโมเดล BERT จากการ predict คำมาเป็น text classification
+  - 3. Multi-Task Fine-Tuning: เนื่องจาก task ของ BERT คือการ predict missing word ดังนั้นเราต้อง fine-tune model ให้ fit กับ task ของเรา
 
 ---
 
@@ -234,9 +233,13 @@ img{
 
 # Experimental Design and Results - Data preprocessing
 
-งานวิจัยนี้ได้มีการใช้ **WordPiece embedding** โดยทำการแบ่งเป็น **30,000 token** และทำการแบ่งคำโดยใช้สัญลักษณ์ **##**  และสำหรับการแบ่งประโยคจะใช้ **spaCy** สำหรับภาษาอังกฤษ และ **“。”, “? ”, “! ”** สำหรับภาษาจีน
+งานวิจัยนี้ได้มีการใช้ **WordPiece embedding** โดยทำการแบ่งเป็น **30,000 token**
+- word: แบ่งโดยใช้สัญลักษณ์ **##**
+- sentence: ใช้ **spaCy** สำหรับภาษาอังกฤษ และ **“。”, “? ”, “! ”** สำหรับภาษาจีน
 
-#### Example
+<br />
+
+#### **Example**
   - Monkey##climb##a##tree
   - I##live##in##Bangkok
 

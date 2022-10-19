@@ -373,7 +373,7 @@ class: 'grid, grid-cols-2'
 ---
 - การทดสอบ Pre-train BERT Strategies 4 : **Layer-wise decreasing layer rate**
 
-  ขั้นตอนในการในการทดสอบ <font color="salmon">การหาค่า Decay factor learning rate ที่ที่จะให้ Error rate น้อยและส่งผลต่อประสิทธิภาพ </font> 
+  ขั้นตอนในการในการทดสอบ <font color="salmon">การหาค่า Decay factor learning rate ที่จะให้ Error rate น้อยและส่งผลต่อประสิทธิภาพ </font> 
   
   <div class="grid grid-cols-2">
     <div>
@@ -549,3 +549,16 @@ img{
   - 3. การทำ Pre-training model ด้วย within-task และ in-domain ช่วยเพิ่มประสิทธิภาพใน		การทำโมเดล
   - 4. แม้ว่าการทำ Multi-task fine-tunning จะช่วยเพิ่มประสิทธิภาพในการประมวลผลมากกว่า sigle-task <br /> fine-tunning แต่ผลลัพธ์ที่ได้ก็ยังไม่เทียบเท่า further pre-traning model
   - 5. BERT สามารถประมวลผลได้ดีแม้ว่าชุดข้อมูลที่นำมาทดสอบจะมีขนาดเล็ก
+
+---
+
+# Members
+
+- Thornthan Yasukum 62070501030
+- Pachara Chantawong 62070501042
+
+---
+layout: 'cover'
+---
+
+# Thank you
